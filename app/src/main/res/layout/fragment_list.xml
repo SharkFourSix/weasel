@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:measureAllChildren="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    app:srcCompat="@drawable/ic_sad"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/empty_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="@string/its_empty_and_lonely_here"
+                    android:textAlignment="center"
+                    android:textColor="@color/emptyView"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:scrollbars="vertical"
+                    app:fastScrollEnabled="true"
+                    app:fastScrollHorizontalThumbDrawable="@drawable/scroll_thumb"
+                    app:fastScrollHorizontalTrackDrawable="@drawable/scroll_track"
+                    app:fastScrollVerticalThumbDrawable="@drawable/scroll_thumb"
+                    app:fastScrollVerticalTrackDrawable="@drawable/scroll_track"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/download_item"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/itemCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"/>
+
+            </LinearLayout>
+        </ViewFlipper>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_plus"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/delete_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:tint="@color/white"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_trash"/>
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

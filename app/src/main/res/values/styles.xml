@@ -1,0 +1,19 @@
+<resources>
+    <!-- Add a black "border" around the text so it doesn't get blended in with the
+     background image -->
+    <style name="ToolbarTitleTextStyle" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:shadowRadius">6</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowColor">@android:color/black</item>
+    </style>
+
+    <style name="Widget.Design.BottomSheet.Modal.AdaptiveStyle">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Design.Light.BottomSheetDialog.Adaptive">
+        <item name="bottomSheetStyle">@style/Widget.Design.BottomSheet.Modal.AdaptiveStyle</item>
+    </style>
+
+</resources>

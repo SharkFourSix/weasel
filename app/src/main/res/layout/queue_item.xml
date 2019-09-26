@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:bind="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="app.weasel.util.BindingUtils"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="item"
+            type="app.weasel.model.QueueItem"/>
+    </data>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Reduce detection logic by ignoring the checkbox's input -->
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"/>
+
+            <LinearLayout
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/download_button"
+                android:layout_toEndOf="@+id/checkbox"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/filename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:text="@{item.fileName}"
+                    tools:text="@tools:sample/lorem/random"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/filesize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    android:text="@{BindingUtils.formatFileSize(item.fileSize)}"
+                    tools:text="4.MB"/>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/download_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/clickable_button_bg"
+                app:srcCompat="@drawable/ic_download"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+</layout>

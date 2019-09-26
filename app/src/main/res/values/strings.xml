@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name" translatable="false">Weasel</string>
+
+    <string name="title_browser">Browser</string>
+    <string name="selection_count" translatable="false">%,d</string>
+    <string name="song_information">Song Information</string>
+    <string name="file_information" translatable="false">File information</string>
+
+    <string name="service_channel" translatable="false">DownloadService</string>
+    <string name="service_description">Notifications for the DownloadService</string>
+    <string name="weasel_downloader">Weasel Downloader</string>
+    <string name="empty_library">Your library is empty.\nDownloaded songs will show up here</string>
+    <string name="its_empty_and_lonely_here">It\'s empty and lonely here</string>
+    <string name="empty_queue">Songs discovered in the browser will show up here.\nClick the + button to get started</string>
+    <string name="search">Search</string>
+    <string name="attribution">Attribution</string>
+    <string name="service_idle" translatable="false">Idle</string>
+    <string name="download_notification_description">Displays download progress notifications</string>
+    <string name="download_notification_channel">Downloads</string>
+    <string name="error_no_storage_permission">The application was not granted the required storage access permission.\n\nClick the button below to open the application\'s settings and manually grant the permission</string>
+    <string name="open_preferences">Open settings</string>
+    <string name="empty_results">Search results will show up here</string>
+    <string name="update_check_title">Checking for update</string>
+    <string name="update_check_failed">Update check failed</string>
+    <string name="update_check_message">Please remain patient…</string>
+    <string name="update_check_fail_message">There was an error checking for latest updates</string>
+    <string name="new_version_title">Update available</string>
+    <string name="new_version_message">A new update is available: %s\n\nUpdate download update now?</string>
+    <string name="update_now_button">Update</string>
+    <string name="old_version_title">Update to date</string>
+    <string name="old_version_message">You are already running the latest version</string>
+    <string name="error">Error</string>
+    <string name="update_download_failed">There was an error when downloading the update</string>
+    <string name="update_download_message">Downloading update…</string>
+    <string name="download_mode_help_info">By default, the application will not download files on startup or move to the next one once a download completes.\n\nEnable this setting to have the application do this automatically</string>
+    <string name="removing_items">Removing items…</string>
+    <string name="created" translatable="false">Created</string>
+    <string name="file_size" translatable="false">File Size</string>
+    <string name="save_path" translatable="false">Save Path</string>
+    <string name="exiting" translatable="false">Exiting…</string>
+    <string name="max_theads_reached">ERROR: Concurrent download limit reached</string>
+</resources>

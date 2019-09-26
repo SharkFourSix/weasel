@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="queueItem"
+            type="app.weasel.model.QueueItem"/>
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Clever little hack -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/anchorView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bottomSheetDialogBackground"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="@string/created"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:created="@{queueItem.created}"
+                    tools:text="Mon Jan 01 00:00:00 GMT +00:00 1970"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="@string/file_size"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    app:fileSize="@{queueItem.fileSize}"
+                    tools:text="2.56MB"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:text="@string/save_path"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:text="@{queueItem.savePath}"
+                    tools:text="/sdcard/app/downloads/filename.mp3"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/download_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/white"
+            app:fabSize="normal"
+            app:layout_anchor="@id/anchorView"
+            app:layout_anchorGravity="bottom|right|end"
+            app:srcCompat="@drawable/ic_download"
+            app:useCompatPadding="true"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

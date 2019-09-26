@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="app.weasel.util.BindingUtils"/>
+
+        <variable
+            name="song"
+            type="app.weasel.model.LibraryItem"/>
+    </data>
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Reduce detection logic by ignoring the checkbox's input -->
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/album_art"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:layout_toEndOf="@+id/checkbox"
+                app:albumArt="@{song.albumArt}"
+                tools:src="@drawable/ic_music_note"/>
+
+            <LinearLayout
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/album_art"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/song_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:text="@{song.title}"
+                    tools:text="Fu-Gee-La"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/song_artist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:text="@{song.artist}"
+                    tools:text="Fugees"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/song_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp"
+                    android:singleLine="true"
+                    app:duration="@{song.duration}"
+                    tools:text="00:04:20"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</layout>

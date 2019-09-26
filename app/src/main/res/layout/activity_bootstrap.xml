@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:context=".activity.BootstrapActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/error_no_storage_permission"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/preferences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/open_preferences"/>
+
+</LinearLayout>

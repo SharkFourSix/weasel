@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Downloads">
+
+        <ListPreference
+            android:defaultValue="@string/default_request_timeout"
+            android:entries="@array/timeout_entries"
+            android:entryValues="@array/timeout_values"
+            android:icon="@drawable/ic_clock"
+            android:key="@string/pref_http_request_timeout"
+            android:summary="Timeout after %s of inactivity"
+            android:title="Request timeout"
+            />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_rocket"
+            android:key="@string/pref_concurrent_download_limit"
+            android:summaryOff="No limit. Might cause UI to stutter"
+            android:title="Concurrent download limit"/>
+
+        <ListPreference
+            android:defaultValue="@string/default_user_agent"
+            android:entries="@array/user_agent_entries"
+            android:entryValues="@array/user_agent_values"
+            android:icon="@drawable/ic_mustache"
+            android:key="@string/pref_http_user_agent"
+            android:summary="%s"
+            android:title="User agent"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_hourglass"
+            android:key="@string/pref_auto_download"
+            android:summaryOff="Manual"
+            android:summaryOn="Automatic"
+            android:title="Initialization mode"
+            />
+
+        <Preference
+            android:key="pref_download_mode_info"
+            android:title="More info..."
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Aesthetics">
+
+        <SwitchPreference
+            android:icon="@drawable/ic_moon"
+            android:key="@string/pref_night_mode"
+            android:summaryOff="Disabled"
+            android:summaryOn="Enabled"
+            android:title="Night mode"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Locale">
+
+        <ListPreference
+            android:defaultValue="@string/default_language"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_values"
+            android:icon="@drawable/ic_earth"
+            android:key="@string/pref_lang"
+            android:summary="%s"
+            android:title="Language"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Application">
+
+        <Preference
+            android:icon="@drawable/ic_smile"
+            android:key="pref_share"
+            android:summary="Sharing is caring"
+            android:title="Share application"
+            />
+
+        <Preference
+            android:icon="@drawable/ic_github"
+            android:key="pref_github"
+            android:summary="Fork/Contribute/Report issues"
+            android:title="GitHub">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/SharkFourSix/Weasel"/>
+        </Preference>
+
+        <Preference
+            android:icon="@drawable/ic_link"
+            android:key="pref_telegram"
+            android:summary="Report issues and get more info"
+            android:title="Find us on Telegram">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://t.me/popGoesTheWeasel"/>
+        </Preference>
+
+        <Preference
+            android:icon="@drawable/ic_license"
+            android:key="pref_licenses"
+            android:summary="3rd party attribution"
+            android:title="Open source licenses"/>
+
+        <Preference
+            android:icon="@drawable/ic_home"
+            android:key="pref_home_path"
+            android:title="Home path"/>
+
+        <Preference
+            android:icon="@drawable/ic_sync"
+            android:key="pref_update_check"
+            android:title="Check for update"
+            />
+
+        <Preference
+            android:icon="@drawable/ic_download"
+            android:key="pref_update_download"
+            android:title="Update available"/>
+
+        <Preference
+            android:icon="@drawable/ic_tag"
+            android:key="pref_version"
+            android:title="Version"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_http_request_timeout" translatable="false">http_request_timeout</string>
+    <string name="pref_http_user_agent" translatable="false">http_user_agent</string>
+    <string name="pref_night_mode" translatable="false">night_mode</string>
+    <string name="pref_lang" translatable="false">lang</string>
+    <string name="pref_auto_download" translatable="false">auto_download_init</string>
+    <string name="pref_concurrent_download_limit" translatable="false">concurrent_download_limit</string>
+</resources>

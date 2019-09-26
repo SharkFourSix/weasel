@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="app.weasel">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:name=".WeaselApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight"
+        android:usesCleartextTraffic="@bool/useClearTextHttpRequests"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
+
+        <service
+            android:name=".service.DownloadService"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".service.DownloadService$ExitIntentReceiver"
+            android:exported="false"/>
+
+        <meta-data
+            android:name="android.webkit.WebView.MetricsOptOut"
+            android:value="true"/>
+
+        <activity
+            android:name=".activity.BootstrapActivity"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".activity.AttributionActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/attribution"/>
+
+        <activity
+            android:name=".activity.BrowserActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_browser"/>
+
+        <activity
+            android:name=".activity.SearchActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/search"/>
+
+        <activity
+            android:name=".activity.SongPropertySheetActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity
+            android:name=".activity.AttributionLicenseActivity"
+            android:configChanges="orientation|screenSize"/>
+
+
+        <!-- Provider will allow us to share private storage data -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"/>
+        </provider>
+
+    </application>
+
+</manifest>

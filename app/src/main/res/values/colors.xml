@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="emptyView">#c5c5c5</color>
+    <color name="black">#000</color>
+    <color name="grey">#e5e5e5</color>
+
+    <color name="darkThemeColorAccent">#81ccc4</color>
+    <color name="darkThemeColorPrimaryDark">#181818</color>
+    <color name="bottomSheetDialogBackground">#fafafa</color>
+</resources>
