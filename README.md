@@ -10,7 +10,8 @@ website using the embedded web browser. The user then has  the option to downloa
 ### Notes on releases
 
 - [x] Release tags must reflect the application version name (i.e v1.0) as defined in [build.gradle](app/build.gradle)
-- [x] The must be at most 3 releases at any given moment and no more
+- [x] There must be at most 3 releases at any given moment and no more
+- [x] APK name must me "app-release.apk" under each respective release tag
 
 ### Contributions
 
