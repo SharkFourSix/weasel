@@ -343,13 +343,13 @@ public final class DownloadService extends Service {
                 }
                 break;
             case download:
-                if (mTaskCount.get() < PlatformUtils.MAX_THREAD_COUNT
-                    && !PreferenceUtils.isConcurrentLimitEnabled(this)) {
-                    downloadFile(this, item);
-                } else {
-                    Toast.makeText(this,
+                if (mTaskCount.get() > PlatformUtils.MAX_THREAD_COUNT
+                    && PreferenceUtils.isConcurrentLimitEnabled(this)) {
+                    mHandler.post(() -> Toast.makeText(this,
                         getString(R.string.max_theads_reached),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show());
+                } else {
+                    downloadFile(this, item);
                 }
                 break;
         }
