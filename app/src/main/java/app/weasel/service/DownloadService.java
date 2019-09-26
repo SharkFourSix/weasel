@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
@@ -69,12 +68,10 @@ public final class DownloadService extends Service {
     private static final String ACTION_EXIT_APPLICATION = "app.weasel.intent.action.EXIT_APPLICATION";
 
     private static final String SERVICE_CHANNEL_ID = "service_channel";
-    private static final String DOWNLOAD_CHANNEL_ID = "download_channel";
 
     private static final String TAG = "DownloadService";
 
     private static final int SERVICE_NOTIFICATION_ID = 101;
-    private static final int DOWNLOAD_NOTIFICATION_ID = 102;
 
     public static final class ExitIntentReceiver extends BroadcastReceiver {
         public ExitIntentReceiver() {
@@ -90,18 +87,15 @@ public final class DownloadService extends Service {
     }
 
     private NotificationCompat.Builder mServiceNotificationBuilder;
-    private NotificationCompat.Builder mDownloadNotificationBuilder;
 
     private NotificationManager mNotificationManager;
     private RemoteViews mServiceNotificationRemoteViews;
-    private RemoteViews mDownloadNotificationRemoteViews;
 
     private static volatile DownloadService mService;
 
     private Handler mHandler;
 
     private final Runnable mIdleIndicator = () -> setStatusText(getString(R.string.service_idle));
-    private final Runnable mDownloadNotificationRemover = () -> mNotificationManager.cancel(DOWNLOAD_NOTIFICATION_ID);
 
     private final CompositeDisposable mDisposableContainer = new CompositeDisposable();
 
@@ -483,21 +477,12 @@ public final class DownloadService extends Service {
         mServiceNotificationRemoteViews = new RemoteViews(
             getPackageName(),
             R.layout.notification_service_status);
-        mDownloadNotificationRemoteViews = new RemoteViews(
-            getPackageName(),
-            R.layout.notification_download_status
-        );
 
         mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         mServiceNotificationBuilder = newBuilder(
             SERVICE_CHANNEL_ID,
             mServiceNotificationRemoteViews
-        );
-
-        mDownloadNotificationBuilder = newBuilder(
-            DOWNLOAD_CHANNEL_ID,
-            mDownloadNotificationRemoteViews
         );
 
         mServiceNotificationRemoteViews.setImageViewResource(R.id.icon, R.drawable.ic_launcher);
@@ -536,42 +521,14 @@ public final class DownloadService extends Service {
                     )
             );
 
-        final Bundle extras = new Bundle();
-        extras.putInt(MainActivity.EXTRA_FRAGMENT, MainActivity.FRAGMENT_INDEX_DOWNLOADS);
-
-        mDownloadNotificationRemoteViews.setOnClickPendingIntent(
-            R.id.container,
-            PendingIntent
-                .getActivity(
-                    this,
-                    101,
-                    new Intent(
-                        this,
-                        MainActivity.class
-                    ).setFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    ).putExtras(
-                        extras
-                    ),
-                    0
-                )
-        );
-
-        mDownloadNotificationRemoteViews.setImageViewResource(
-            R.id.downloads_icon,
-            R.drawable.ic_download
-        );
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final String[][] channels = {
                 {SERVICE_CHANNEL_ID, getString(R.string.service_channel), getString(R.string.service_description), "false"},
-                {DOWNLOAD_CHANNEL_ID, getString(R.string.download_notification_channel), getString(R.string.download_notification_description), "false"}
             };
             final int[] importance = {
                 NotificationManager.IMPORTANCE_LOW,
-                NotificationManager.IMPORTANCE_LOW
             };
-            final boolean[] vibration = {false, false};
+            final boolean[] vibration = {false};
             for (int i = 0; i < channels.length; i++) {
                 final String[] channel_info = channels[i];
                 final int channel_importance = importance[i];
@@ -606,13 +563,6 @@ public final class DownloadService extends Service {
     private void setStatusText(CharSequence text) {
         mServiceNotificationRemoteViews.setTextViewText(R.id.content, text);
         mNotificationManager.notify(SERVICE_NOTIFICATION_ID, mServiceNotificationBuilder.build());
-    }
-
-    private void setDownloadCount(int downloadCount) {
-        mHandler.removeCallbacks(mDownloadNotificationRemover);
-        mDownloadNotificationRemoteViews.setTextViewText(R.id.download_count, String.format(Locale.US, "%,d", downloadCount));
-        mNotificationManager.notify(DOWNLOAD_NOTIFICATION_ID, mDownloadNotificationBuilder.build());
-        mHandler.postDelayed(mDownloadNotificationRemover, TimeUnit.SECONDS.toMillis(15));
     }
 
     @Nullable
