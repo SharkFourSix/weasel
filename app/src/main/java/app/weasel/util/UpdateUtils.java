@@ -58,8 +58,7 @@ public enum UpdateUtils {
                         context.getString(R.string.update_check_fail_message)
                     );
                 } else {
-                    double currentVersion, latestVersion = currentVersion
-                        = Double.valueOf(BuildConfig.VERSION_NAME);
+                    double latestVersion = Double.valueOf(BuildConfig.VERSION_NAME);
                     Tag latestTag = null;
                     if (!tags.isEmpty()) {
                         for (Tag tag : tags) {
@@ -73,7 +72,8 @@ public enum UpdateUtils {
                             } catch (Exception e) {
                                 Log.e(logTag, e.getMessage(), e);
                             }
-                            if ((latestVersion = Math.max(latestVersion, version)) > currentVersion) {
+                            if (version > latestVersion) {
+                                latestVersion = version;
                                 latestTag = tag;
                             }
                         }
@@ -113,13 +113,14 @@ public enum UpdateUtils {
     }
 
     public static void downloadLatestApplication(Context context) {
-        ProgressDialog progressDialog = ProgressDialog.show(
-            context,
-            null,
-            context.getString(R.string.update_download_message),
-            true,
-            false
-        );
+        ProgressDialog progressDialog = new ProgressDialog(context);
+
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage(context.getString(R.string.update_download_message));
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
 
         final String version = PreferenceUtils.getNewApplicationVersionTag(context);
         final String url = String.format(
@@ -130,10 +131,15 @@ public enum UpdateUtils {
             version
         );
         final File targetFile = PlatformUtils.makeUpdatePath(context, version);
-
         Ion.with(context)
             .load(url)
-            .progressDialog(progressDialog)
+            .progressHandler((downloaded, total) -> {
+                if (progressDialog.isIndeterminate()) {
+                    progressDialog.setIndeterminate(false);
+                }
+                progressDialog.setProgress(0); // <-- Fix stupid bug in ProgressDialog
+                progressDialog.setProgress((int) (100D * (double) downloaded / (double) total));
+            })
             .write(targetFile)
             .setCallback((e, result) -> {
                 progressDialog.dismiss();
@@ -152,13 +158,15 @@ public enum UpdateUtils {
 
                     // trigger package installer
                     context.startActivity(
-                        new Intent(
-                            Intent.ACTION_VIEW
-                        ).setFlags(
-                            Intent.FLAG_ACTIVITY_NEW_TASK
-                        ).setDataAndType(
-                            uri,
-                            "application/vnd.android.package-archive"
+                        Intent.createChooser(
+                            new Intent(
+                                Intent.ACTION_VIEW
+                            ).setFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK
+                            ).setDataAndType(
+                                uri,
+                                "application/vnd.android.package-archive"
+                            ), "Install using..."
                         )
                     );
                 }
